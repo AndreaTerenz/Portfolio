@@ -1,0 +1,12 @@
+.section-div {
+    background: whitesmoke;
+    margin: 10px 40px 10px 40px;
+    border-radius: 8px;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 100%; }
+}
