@@ -1,12 +1,31 @@
+body {
+    padding-top: 4.5rem;
+    padding-bottom: 120px;
+}
+
 .section-div {
     background: whitesmoke;
-    margin: 10px 40px 10px 40px;
+    margin: 10px 40px;
     border-radius: 8px;
-    animation-name: fadeIn;
-    animation-duration: 2s;
+    animation: fadeIn 1s, slideUp .5s;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 100%; }
+    from {
+        opacity: 0;
+        margin-top: 20px;
+    }
+    to {
+        opacity: 100%;
+        margin-top: 10px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        margin-top: 30px;
+    }
+    to {
+        margin-top: 10px;
+    }
 }
