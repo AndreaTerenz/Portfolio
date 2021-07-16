@@ -7,7 +7,19 @@ body {
     background: whitesmoke;
     margin: 10px 40px;
     border-radius: 8px;
+}
+
+.animateOnLoad {
     animation: fadeIn 1s, slideUp .5s;
+}
+
+.btn-social {
+    display: inline-block;
+    transition: transform .2s;
+}
+
+.btn-social:hover {
+    transform: scale(1.1);
 }
 
 @keyframes fadeIn {
