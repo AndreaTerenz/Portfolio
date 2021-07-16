@@ -3,14 +3,18 @@ body {
     padding-bottom: 120px;
 }
 
+hr {
+    border: none;
+    opacity: 100%;
+    background-color: white;
+    width: 500px;
+    margin: 20px auto;
+}
+
 .section-div {
     background: whitesmoke;
     margin: 10px 40px;
     border-radius: 8px;
-}
-
-.animateOnLoad {
-    animation: fadeIn 1s, slideUp .5s;
 }
 
 .btn-social {
@@ -22,14 +26,16 @@ body {
     transform: scale(1.1);
 }
 
+.animateOnLoad {
+    animation: fadeIn 1s, slideUp .5s;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
-        margin-top: 20px;
     }
     to {
         opacity: 100%;
-        margin-top: 10px;
     }
 }
 
