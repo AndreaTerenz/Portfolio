@@ -40,7 +40,7 @@ hr {
     text-align: justify
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .about-text {
         font-size: 25px;
     }
