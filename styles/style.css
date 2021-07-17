@@ -10,6 +10,40 @@ hr {
     min-width: 350px;
     width: 50%;
     margin: 20px auto;
+    animation: hr-load-anim .5s;
+}
+
+#subtitle {
+    animation: subtitle-load-anim .5s;
+}
+
+@keyframes hr-load-anim {
+    from {
+        width: 0;
+    }
+    to {
+        width: 50%;
+    }
+}
+
+@keyframes subtitle-load-anim {
+    from {
+        margin-top: -20px;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+
+.about-text {
+    font-size: 20px;
+    text-align: justify
+}
+
+@media (min-width: 992px) {
+    .about-text {
+        font-size: 25px;
+    }
 }
 
 .section-div {
@@ -20,6 +54,7 @@ hr {
 
 .btn-social {
     display: inline-block;
+    width: 160px;
     transition: transform .2s;
 }
 
@@ -28,7 +63,7 @@ hr {
 }
 
 .animateOnLoad {
-    animation: fadeIn 1s, slideUp .5s;
+    animation: fadeIn 1s;
 }
 
 @keyframes fadeIn {
