@@ -61,7 +61,7 @@ hr {
 
 .btn-social {
     display: inline-block;
-    width: 160px;
+    text-align: center;
     transition: transform .2s;
 }
 
