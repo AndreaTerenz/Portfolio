@@ -29,16 +29,6 @@ hr {
     animation: hr-load-anim .5s;
 }
 
-@media (max-width: 650px) {
-    hr {
-        width: 100%;
-    }
-}
-
-#subtitle {
-    animation: subtitle-load-anim .5s;
-}
-
 @keyframes hr-load-anim {
     from {
         width: 0;
@@ -47,6 +37,26 @@ hr {
         width: 50%;
     }
 }
+
+@media (max-width: 650px) {
+    hr {
+        width: 100%;
+    }
+
+    @keyframes hr-load-anim {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+}
+
+#subtitle {
+    animation: subtitle-load-anim .5s;
+}
+
 
 @keyframes subtitle-load-anim {
     from {
