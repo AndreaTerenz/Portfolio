@@ -14,10 +14,15 @@ hr {
     border: none;
     opacity: 100%;
     background-color: white;
-    min-width: 350px;
     width: 50%;
     margin: 20px auto;
     animation: hr-load-anim .5s;
+}
+
+@media (max-width: 650px) {
+    hr {
+        width: 100%;
+    }
 }
 
 #subtitle {
@@ -45,6 +50,12 @@ hr {
 .about-text {
     font-size: 20px;
     text-align: justify
+}
+
+@media (min-width: 576px) {
+    .about-text {
+        font-size: 22px;
+    }
 }
 
 @media (min-width: 768px) {
