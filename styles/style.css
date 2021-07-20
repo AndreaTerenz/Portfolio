@@ -5,6 +5,10 @@ html * {
 body {
     padding-top: 4.5rem;
     padding-bottom: 120px;
+    /*background: #3939a7;*/
+    /*background-image: linear-gradient(to bottom right, #3939a7, #90b1ea);*/
+    background: rgb(57, 57, 167);
+    background: radial-gradient(circle, rgba(57, 57, 167, 1) 9%, rgba(62, 126, 236, 1) 89%);
 }
 
 a.anchor {
