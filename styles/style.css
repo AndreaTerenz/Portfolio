@@ -105,6 +105,14 @@ hr {
     transform: scale(1.1);
 }
 
+.nav-button {
+    transition: transform .2s;
+}
+
+.nav-button:hover {
+    transform: scale(1.1);
+}
+
 .animateOnLoad {
     animation: fadeIn 1s;
 }
