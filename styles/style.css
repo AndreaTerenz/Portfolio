@@ -54,7 +54,7 @@ hr {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     hr {
         width: 100%;
     }
@@ -104,7 +104,12 @@ hr {
 .section-div {
     background: whitesmoke;
     margin: 10px 40px;
-    border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+    .section-div {
+        border-radius: 8px;
+    }
 }
 
 .btn-social {
@@ -127,7 +132,6 @@ hr {
         transform: scale(1.1);
     }
 }
-
 
 .animateOnLoad {
     animation: fadeIn 1s;
