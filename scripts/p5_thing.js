@@ -5,21 +5,22 @@ var columns
 var offset = 0.0
 
 function setup() {
-    createCanvas(displayWidth, displayHeight).parent("#p5Parent")
+    createCanvas(window.innerWidth, window.innerHeight).parent("#p5Parent")
     drawSquares()
 }
 
 function drawSquares() {
-    ratio = displayWidth / displayHeight
-    size = createVector(displayWidth, displayHeight)
-    columns = rows * ratio
-    rectMode(CENTER)
+    size = createVector(window.innerWidth, window.innerHeight)
+    ratio = size.x / size.y
+    columns = 60
 
-    let colSize = Math.floor(size.x * 2 / columns)
-    let rowSize = Math.floor(size.y * 2 / rows)
+    let colSize = Math.floor(size.x / columns)
+    let rowSize = Math.floor(size.y / rows)
+    console.log(size, rows, columns, ratio, colSize, rowSize)
 
     push()
-    translate(-displayWidth / 2, -displayHeight / 2, 0)
+    translate(size.x / 2, size.y / 2)
+
     strokeWeight(0)
     for (let x = 0; x < columns; x += 1) {
         for (let y = 0; y < rows; y += 1) {
@@ -31,13 +32,14 @@ function drawSquares() {
             let endCol = color('rgb(75,255,255)')
 
             fill(lerpColor(startCol, endCol, noiseVal))
-            let size = createVector(colSize, rowSize)
-            rect(pos.x * colSize - displayWidth / 2, pos.y * rowSize - displayHeight / 2, size.x, size.y)
+            rect(pos.x * colSize - displayWidth / 2, pos.y * rowSize - displayHeight / 2, colSize, rowSize)
         }
     }
+
     pop()
 }
 
 function windowResized() {
+    console.log("AAAAAAAAAAAa")
     drawSquares()
 }
