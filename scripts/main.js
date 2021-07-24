@@ -8,10 +8,11 @@ class Repo {
     }
 }
 
-const indicatorsTemplate = document.getElementById("carousel-indicators-template")
-const indicatorsParent = document.getElementById("carousel-indicators-parent")
-const reposTemplate = document.getElementById("repo-template")
-const reposParent = document.getElementById("repo-car-inner")
+const el_autohide = document.querySelector('.autohide-nav');
+const indicatorsTemplate = document.querySelector("#carousel-indicators-template")
+const indicatorsParent = document.querySelector("#carousel-indicators-parent")
+const reposTemplate = document.querySelector("#repo-template")
+const reposParent = document.querySelector("#repo-car-inner")
 const repos = [
     new Repo("Up The Drain", "FPS prototype game made with Unity", "Up-the-Drain"),
     new Repo("AoC 2020", "Some of my solutions for the 2020 Advent of Code challenges", "Advent-of-Code-2020"),
@@ -20,32 +21,48 @@ const repos = [
     new Repo("This website", "My personal website made with Bootstrap 5", "AndreaTerenz.github.io"),
 ]
 
+document.addEventListener("DOMContentLoaded", () => {
+    repos.forEach((r, i) => {
+        let indicatorClone = indicatorsTemplate.content.cloneNode(true)
+        let btn = indicatorClone.querySelector("button")
 
-repos.forEach((r, i) => {
-    let indicatorClone = indicatorsTemplate.content.cloneNode(true)
-    let btn = indicatorClone.querySelector("button")
+        btn.setAttribute("data-bs-slide-to", i)
+        btn.setAttribute("aria-label", `Slide ${i}`)
 
-    btn.setAttribute("data-bs-slide-to", i)
-    btn.setAttribute("aria-label", `Slide ${i}`)
+        indicatorsParent.appendChild(btn)
 
-    indicatorsParent.appendChild(btn)
+        let repoClone = reposTemplate.content.firstElementChild.cloneNode(true)
+        let h = repoClone.querySelector("h1.repo-name")
+        let d = repoClone.querySelector("p.repo-descr")
+        let l = repoClone.querySelector("a.repo-link")
 
-    let repoClone = reposTemplate.content.firstElementChild.cloneNode(true)
-    let h = repoClone.querySelector("h1.repo-name")
-    let d = repoClone.querySelector("p.repo-descr")
-    let l = repoClone.querySelector("a.repo-link")
+        console.log(r.name)
+        console.log(repoClone)
 
-    console.log(r.name)
-    console.log(repoClone)
+        h.innerText = r.name
+        d.innerText = r.description
+        l.setAttribute("href", r.link)
 
-    h.innerText = r.name
-    d.innerText = r.description
-    l.setAttribute("href", r.link)
+        if (i === 0) {
+            btn.classList.add("active")
+            repoClone.classList.add("active")
+        }
 
-    if (i === 0) {
-        btn.classList.add("active")
-        repoClone.classList.add("active")
+        reposParent.appendChild(repoClone)
+    })
+
+    if (el_autohide) {
+        let last_scroll_top = 0;
+        window.addEventListener('scroll', () => {
+            let scroll_top = window.scrollY;
+            if (scroll_top < last_scroll_top) {
+                el_autohide.classList.remove('scrolled-down');
+                el_autohide.classList.add('scrolled-up');
+            } else {
+                el_autohide.classList.remove('scrolled-up');
+                el_autohide.classList.add('scrolled-down');
+            }
+            last_scroll_top = scroll_top;
+        });
     }
-
-    reposParent.appendChild(repoClone)
-})
+});
