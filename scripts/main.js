@@ -8,11 +8,6 @@ class Repo {
     }
 }
 
-const el_autohide = document.querySelector('.autohide-nav');
-const indicatorsTemplate = document.querySelector("#carousel-indicators-template")
-const indicatorsParent = document.querySelector("#carousel-indicators-parent")
-const reposTemplate = document.querySelector("#repo-template")
-const reposParent = document.querySelector("#repo-car-inner")
 const repos = [
     new Repo("Up The Drain", "FPS prototype game made with Unity", "Up-the-Drain"),
     new Repo("AoC 2020", "Some of my solutions for the 2020 Advent of Code challenges", "Advent-of-Code-2020"),
@@ -22,6 +17,12 @@ const repos = [
 ]
 
 document.addEventListener("DOMContentLoaded", () => {
+    let el_autohide = document.querySelector('.autohide-nav');
+    let indicatorsTemplate = document.querySelector("#carousel-indicators-template")
+    let indicatorsParent = document.querySelector("#carousel-indicators-parent")
+    let reposTemplate = document.querySelector("#repo-template")
+    let reposParent = document.querySelector("#repo-car-inner")
+
     repos.forEach((r, i) => {
         let indicatorClone = indicatorsTemplate.content.cloneNode(true)
         let btn = indicatorClone.querySelector("button")
