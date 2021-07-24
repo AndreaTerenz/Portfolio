@@ -90,107 +90,32 @@
         <div class="row m-auto h-100">
             <div id="reposCarousel" class="carousel slide col-12 col-lg-6 mx-auto" data-bs-ride="carousel"
                  data-bs-interval="false">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="0" aria-label="Slide 1"
-                            class="active"></button>
-                    <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="1" aria-label="Slide 2"
-                            class="" aria-current="true"></button>
-                    <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="2" aria-label="Slide 3"
-                            class=""></button>
-                    <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="3" aria-label="Slide 4"
-                            class="" aria-current="true"></button>
-                    <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="4" aria-label="Slide 5"
-                            class="" aria-current="true"></button>
+                <div class="carousel-indicators" id="carousel-indicators-parent">
+                    <template id="carousel-indicators-template">
+                        <button type="button" data-bs-target="#reposCarousel" data-bs-slide-to="-"
+                                aria-label="-"></button>
+                    </template>
                 </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#192a75"></rect>
-                        </svg>
+                <div class="carousel-inner" id="repo-car-inner">
+                    <template id="repo-template">
+                        <div class="carousel-item">
+                            <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
+                                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <rect width="100%" height="100%" fill="#192a75"></rect>
+                            </svg>
 
-                        <div class="container">
-                            <div class="carousel-caption text-center">
-                                <h1>Up the Drain</h1>
-                                <p>FPS prototype game made with Unity</p>
-                                <p><a class="btn btn-lg border border-white btn-social btn-github"
-                                      href="https://github.com/AndreaTerenz/Up-the-Drain">
-                                    <span class="fa fa-github"></span>See the source code
-                                </a></p>
+                            <div class="container">
+                                <div class="carousel-caption text-center">
+                                    <h1 class="repo-name"></h1>
+                                    <p class="repo-descr"></p>
+                                    <p><a class="btn btn-lg border border-white btn-social btn-github repo-link"
+                                          href="">
+                                        <span class="fa fa-github"></span>See the source code
+                                    </a></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#192a75"></rect>
-                        </svg>
-
-                        <div class="container">
-                            <div class="carousel-caption text-center">
-                                <h1>AoC 2020</h1>
-                                <p>Some of my solutions for the 2020<br>Advent of Code challenges</p>
-                                <p><a class="btn btn-lg border border-white btn-social btn-github"
-                                      href="https://github.com/AndreaTerenz/Advent-of-Code-2020">
-                                    <span class="fa fa-github"></span>See the source code
-                                </a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#192a75"></rect>
-                        </svg>
-
-                        <div class="container">
-                            <div class="carousel-caption text-center">
-                                <h1>p5 Pong</h1>
-                                <p>Pong clone made with p5.js and Node.js</p>
-                                <p><a class="btn btn-lg border border-white btn-social btn-github"
-                                      href="https://github.com/AndreaTerenz/p5-pong">
-                                    <span class="fa fa-github"></span>See the source code
-                                </a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#192a75"></rect>
-                        </svg>
-
-                        <div class="container">
-                            <div class="carousel-caption text-center">
-                                <h1>GodotMaze</h1>
-                                <p>A demonstration of some maze<br>algorithms made with Godot</p>
-                                <p><a class="btn btn-lg border border-white btn-social btn-github"
-                                      href="https://github.com/AndreaTerenz/GodotMaze">
-                                    <span class="fa fa-github"></span>See the source code
-                                </a></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <svg class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg"
-                             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <rect width="100%" height="100%" fill="#192a75"></rect>
-                        </svg>
-
-                        <div class="container">
-                            <div class="carousel-caption text-center">
-                                <h1>This website</h1>
-                                <p>My personal website made with Bootstrap 5</p>
-                                <p><a class="btn btn-lg border border-white btn-social btn-github"
-                                      href="https://github.com/AndreaTerenz/AndreaTerenz.github.io">
-                                    <span class="fa fa-github"></span>See the source code
-                                </a></p>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#reposCarousel"
                         data-bs-slide="prev">
@@ -234,6 +159,8 @@
         </div>
     </div>
 </div>
+
+<script src="scripts/main.js"></script>
 
 </body>
 
