@@ -78,6 +78,9 @@ hr {
     margin: 10px 40px;
 }
 
+.short-text-repo-btn {
+    display: none;
+}
 
 .btn-social {
     display: inline-block;
@@ -113,6 +116,16 @@ hr {
 @media (min-width: 576px) {
     .about-text {
         font-size: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+    .short-text-repo-btn {
+        display: inline-block;
+    }
+
+    .long-text-repo-btn {
+        display: none;
     }
 }
 
