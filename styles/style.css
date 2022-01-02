@@ -2,7 +2,7 @@ html * {
     font-family: 'Work Sans', sans-serif;
 }
 
-body {
+#index-body {
     padding-top: 4.5rem;
     padding-bottom: 120px;
     background: radial-gradient(circle, rgba(57, 57, 167, 1) 9%, rgba(62, 126, 236, 1) 89%);
