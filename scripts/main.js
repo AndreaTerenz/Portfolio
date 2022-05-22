@@ -3,8 +3,9 @@ class Repo {
 
     constructor(name, description, gh_name) {
         this.name = name
+        this.gh_name = gh_name
         this.description = description
-        this.link = Repo.base_gh_url + gh_name
+        this.link = Repo.base_gh_url + this.gh_name
     }
 }
 
@@ -15,6 +16,17 @@ const repos = [
     new Repo("GodotMaze", "A demonstration of some maze algorithms made with Godot", "GodotMaze"),
     new Repo("This website", "My personal website made with Bootstrap 5", "AndreaTerenz.github.io"),
 ]
+
+function getAge(yy, mm, dd) {
+    let today = new Date();
+    let birthDate = new Date(yy, mm - 1, dd);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     let el_autohide = document.querySelector('.autohide-nav');
@@ -66,4 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
             last_scroll_top = scroll_top;
         });
     }
+
+    //Dinamically set the age
+    let age_anchor = document.getElementById("age")
+    age_anchor.innerText = getAge(1999, 10, 30);
 });
