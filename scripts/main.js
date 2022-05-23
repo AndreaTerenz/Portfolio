@@ -1,20 +1,20 @@
 class Repo {
-    static base_gh_url = "https://github.com/AndreaTerenz/"
+    static username = "AndreaTerenz"
 
-    constructor(name, description, gh_name) {
-        this.name = name
+    constructor(display_name, description, gh_name) {
+        this.display_name = display_name
         this.gh_name = gh_name
         this.description = description
-        this.link = Repo.base_gh_url + this.gh_name
+        this.link = `https://github.com/${Repo.username}/${this.gh_name}`
     }
 }
 
 const repos = [
-    new Repo("Up The Drain", "FPS prototype game made with Unity", "Up-the-Drain"),
+    new Repo("Nameless", "FPS prototype game made with Godot", "Nameless"),
     new Repo("AoC 2020", "Some of my solutions for the 2020 Advent of Code challenges", "Advent-of-Code-2020"),
     new Repo("p5 Pong", "Pong clone made with p5.js and Node.js", "p5-pong"),
-    new Repo("GodotMaze", "A demonstration of some maze algorithms made with Godot", "GodotMaze"),
-    new Repo("This website", "My personal website made with Bootstrap 5", "AndreaTerenz.github.io"),
+    new Repo("GodotMaze", "A demonstration of some maze generation algorithms made with Godot", "GodotMaze"),
+    new Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "AndreaTerenz.github.io"),
 ]
 
 function getAge(yy, mm, dd) {
@@ -30,13 +30,13 @@ function getAge(yy, mm, dd) {
 
 document.addEventListener("DOMContentLoaded", () => {
     let el_autohide = document.querySelector('.autohide-nav');
-    let indicatorsTemplate = document.querySelector("#carousel-indicators-template")
+    let indicatorsTemplate = document.querySelector("#carousel-indicators-template").content
     let indicatorsParent = document.querySelector("#carousel-indicators-parent")
-    let reposTemplate = document.querySelector("#repo-template")
+    let reposTemplate = document.querySelector("#repo-template").content.firstElementChild
     let reposParent = document.querySelector("#repo-car-inner")
 
     repos.forEach((r, i) => {
-        let indicatorClone = indicatorsTemplate.content.cloneNode(true)
+        let indicatorClone = indicatorsTemplate.cloneNode(true)
         let btn = indicatorClone.querySelector("button")
 
         btn.setAttribute("data-bs-slide-to", i)
@@ -44,29 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         indicatorsParent.appendChild(btn)
 
-        let repoClone = reposTemplate.content.firstElementChild.cloneNode(true)
-        let h = repoClone.querySelector("h1.repo-name")
-        let d = repoClone.querySelector("p.repo-descr")
-        let l = repoClone.querySelector("a.repo-link")
-
-        console.log(r.name)
-        console.log(repoClone)
-
-        h.innerText = r.name
-        d.innerText = r.description
-        l.setAttribute("href", r.link)
+        let repoCard = reposTemplate.cloneNode(true)
+        repoCard.setAttribute("data-repo", `${Repo.username}/${r.gh_name}`)
+        repoCard.setAttribute("data-display-name", `${r.display_name}`)
+        repoCard.setAttribute("data-description", `${r.description}`)
 
         if (i === 0) {
             btn.classList.add("active")
-            repoClone.classList.add("active")
+            repoCard.classList.add("active")
         }
 
-        reposParent.appendChild(repoClone)
+        reposParent.appendChild(repoCard)
     })
 
     if (el_autohide) {
         let last_scroll_top = 0;
-        window.addEventListener('scroll', () => {
+        document.addEventListener('scroll', () => {
             let scroll_top = window.scrollY;
             if (scroll_top < last_scroll_top) {
                 el_autohide.classList.remove('scrolled-down');
