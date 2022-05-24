@@ -75,4 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //Dinamically set the age
     let age_anchor = document.getElementById("age")
     age_anchor.innerText = getAge(1999, 10, 30);
+
+    let diocan_elems = document.querySelectorAll("._paragraph_");
+    let classes = ["py-3", "px-0", "px-sm-3", "mx-auto", "mx-md-5"]
+
+    diocan_elems.forEach((elem) => {
+        classes.forEach(c => elem.classList.add(c))
+    })
 });
