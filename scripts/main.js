@@ -28,12 +28,25 @@ function getAge(yy, mm, dd) {
     return age;
 }
 
+function cloneTemplate(t) {
+    let templ = undefined
+
+    if (typeof (t) === "string")
+        templ = document.querySelector(`#${t}`)
+    else if (typeof (t) === "object")
+        templ = t
+    else
+        return templ
+
+    return templ.content.firstElementChild.cloneNode(true)
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     let el_autohide = document.querySelector('.autohide-nav');
     let indicatorsTemplate = document.querySelector("#carousel-indicators-template").content
     let indicatorsParent = document.querySelector("#carousel-indicators-parent")
-    let reposTemplate = document.querySelector("#repo-template").content.firstElementChild
     let reposParent = document.querySelector("#repo-car-inner")
+    let reposTemplate = document.querySelector("#repo-template")
 
     repos.forEach((r, i) => {
         let indicatorClone = indicatorsTemplate.cloneNode(true)
@@ -44,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         indicatorsParent.appendChild(btn)
 
-        let repoCard = reposTemplate.cloneNode(true)
+        let repoCard = cloneTemplate(reposTemplate)
         repoCard.setAttribute("data-repo", `${Repo.username}/${r.gh_name}`)
         repoCard.setAttribute("data-display-name", `${r.display_name}`)
         repoCard.setAttribute("data-description", `${r.description}`)
