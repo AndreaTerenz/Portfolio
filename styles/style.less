@@ -1,7 +1,14 @@
 @import "repos-carousel";
+@import "keyframes";
 
 html * {
     font-family: 'Work Sans', sans-serif;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 #index-body {
@@ -32,27 +39,9 @@ hr {
     animation: hr-load-anim .5s;
 }
 
-@keyframes hr-load-anim {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
 #subtitle {
     text-shadow: 2px 2px 10px #222222;
     animation: subtitle-load-anim .5s;
-}
-
-@keyframes subtitle-load-anim {
-    from {
-        margin-top: -20px;
-    }
-    to {
-        margin-top: 0;
-    }
 }
 
 .about-text {
@@ -150,23 +139,5 @@ hr {
 
     .nav-button:hover {
         transform: scale(1.1);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 100%;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        margin-top: 30px;
-    }
-    to {
-        margin-top: 10px;
     }
 }

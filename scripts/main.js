@@ -41,8 +41,23 @@ function cloneTemplate(t) {
     return templ.content.firstElementChild.cloneNode(true)
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    let el_autohide = document.querySelector('.autohide-nav');
+function repeatInterval(callback, delay, interval, repeats, callback_end) {
+    setTimeout(() => {
+        let i = 0
+        let intervID = setInterval(() => {
+            callback(i)
+
+            i += 1
+            if (i >= repeats) {
+                clearInterval(intervID)
+                if (callback_end)
+                    callback_end()
+            }
+        }, interval)
+    }, delay)
+}
+
+function init_repos() {
     let indicatorsTemplate = document.querySelector("#carousel-indicators-template").content
     let indicatorsParent = document.querySelector("#carousel-indicators-parent")
     let reposParent = document.querySelector("#repo-car-inner")
@@ -69,7 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         reposParent.appendChild(repoCard)
     })
+}
 
+function init_autohide() {
+    let el_autohide = document.querySelector('.autohide-nav');
     if (el_autohide) {
         let last_scroll_top = 0;
         document.addEventListener('scroll', () => {
@@ -84,6 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
             last_scroll_top = scroll_top;
         });
     }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    init_repos()
+    init_autohide()
 
     //Dinamically set the age
     let age_anchor = document.getElementById("age")
@@ -95,4 +118,17 @@ document.addEventListener("DOMContentLoaded", () => {
     diocan_elems.forEach((elem) => {
         classes.forEach(c => elem.classList.add(c))
     })
+
+    let nameHeader = document.querySelector("#nameHeader")
+    let fake_cli_prompt = "#> "
+    nameHeader.textContent = fake_cli_prompt
+    let name = "echo $NAME"
+    repeatInterval((i) => {
+            nameHeader.textContent += name[0]
+            name = name.slice(1)
+        },
+        1000, 120, name.length,
+        () => {
+            setTimeout(() => nameHeader.textContent = `${fake_cli_prompt}Andrea Terenziani`.toUpperCase(), 1000)
+        })
 });
