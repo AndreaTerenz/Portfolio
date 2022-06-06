@@ -26,6 +26,9 @@
     <link href="styles/style.less" rel="stylesheet/less" type="text/css"/>
     <link href="styles/bootstrap-social.css" rel="stylesheet">
 
+    <!--p5.js-->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+
     <!--Misc js-->
     <script crossorigin="anonymous" src="https://kit.fontawesome.com/6a5ea18bdb.js"></script>
     <script src="scripts/main.js"></script>
@@ -40,7 +43,7 @@
 <nav class="autohide-nav navbar navbar-expand-md navbar-dark bg-dark fixed-top border-bottom border-2 border-white shadow">
     <div class="container-fluid">
         <a class="navbar-brand me-2 ms-1 nav-button" href="index.html">
-            <img src="icons/favicon2.svg" class="py-auto" width="30" height="30">
+            <img class="py-auto" height="30" src="icons/favicon2.svg" width="30">
         </a>
         <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler"
@@ -63,7 +66,7 @@
     </div>
 </nav>
 <div class="animateOnLoad px-4 py-5 my-5 text-center text-light">
-    <h1 id="nameHeader" class="typewriter header">Andrea Terenziani</h1>
+    <h1 class="typewriter header" id="nameHeader">Andrea Terenziani</h1>
     <hr class="shadow-lg" style="height: 3px;">
     <div class="col-lg-6 mx-auto" id="subtitle">
         <p class="lead mb-4">Software developer</p>
@@ -72,14 +75,15 @@
 <div class="container-xl px-0 px-md-auto">
     <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
         <a class="anchor" id="About"></a>
-        <h2 class="row m-auto pb-3">About me</h2>
+        <h2 class="row m-auto pb-3 paragraph_title">About me</h2>
         <div class="row m-auto">
             <div class="col-12 col-lg-4 mx-auto my-4 px-0 align-content-center">
                 <img alt="my face" class="row m-auto img-fluid shadow-lg" src="images/photo.png">
             </div>
             <div class="col-12 col-lg-8 ps-lg-5 m-auto">
-                <div class=" about-text">
-                    I'm a <a id="age">21</a> year old CS student at the University of Modena and Reggio Emilia in Italy
+                <div class="figure-caption text-center">Pronouns: He/Him</div>
+                <div class="py-4 about-text">
+                    I'm a <a id="age">99</a> year old CS student at the University of Modena and Reggio Emilia in Italy
                     with a passion for coding. I've tinkered with stuff from Pascal to Processing, from C++ to Godot
                     (great fan btw), from Bash to Python; but don't take me as an expert on everything. Right now I'm
                     most interested in game and web development, and after my Bachelor degree I'd like to take a
@@ -87,14 +91,27 @@
                     degree in Artificial Intelligence
                 </div>
 
-                <div class="pt-3 figure-caption text-center">Pronouns: He/Him</div>
+                <div style="display: flex; justify-content: space-around">
+                    <img height="100"
+                         src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg"
+                         width="100">
+                    <img height="100"
+                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
+                         width="100">
+                    <img height="100"
+                         src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg" width="100">
+                    <img height="100"
+                         src="https://seeklogo.com/images/C/c-sharp-c-logo-02F17714BA-seeklogo.com.png" width="100">
+                    <img height="100"
+                         src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" width="100">
+                </div>
             </div>
         </div>
     </div>
 
     <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
         <a class="anchor" id="Projects"></a>
-        <h2 class="row m-auto pb-3">My favorite projects</h2>
+        <h2 class="row m-auto pb-3 paragraph_title">My favorite projects</h2>
         <div class="row m-auto h-100">
             <div class="carousel slide carousel-fade col-12 col-lg-6 mx-auto" data-bs-interval="false"
                  data-bs-ride="carousel"
@@ -132,7 +149,7 @@
 
     <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
         <a class="anchor" id="Contacts"></a>
-        <h2 class="row m-auto pb-3">Contacts</h2>
+        <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
         <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
             <div class="col">
                 <a class="btn btn-lg btn-block btn-social btn-linkedin"
