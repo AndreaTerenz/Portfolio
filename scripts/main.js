@@ -17,6 +17,30 @@ const repos = [
     new Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "AndreaTerenz.github.io"),
 ]
 
+class ContactButton extends HTMLAnchorElement {
+    constructor() {
+        self = super();
+        console.log("AAAAAAAAAAAAAAAAAA")
+
+        document.addEventListener("DOMContentLoaded", () => {
+            this.classList.add("btn btn-lg btn-block btn-social")
+            let social = this.getAttribute("data-social")
+
+            if (social)
+                this.classList.add(`btn-${social}`)
+
+            let icon = this.getAttribute("data-fa-icon")
+            let sp = document.createElement("span")
+
+            if (icon)
+                sp.classList.add(`fa fa-${icon}`)
+            this.appendChild(sp)
+        })
+    }
+}
+
+customElements.define('contact-button', ContactButton, {extends: 'a'});
+
 function getAge(yy, mm, dd) {
     let today = new Date();
     let birthDate = new Date(yy, mm - 1, dd);
@@ -88,6 +112,7 @@ function init_repos() {
 
 function init_autohide() {
     let el_autohide = document.querySelector('.autohide-nav');
+
     if (el_autohide) {
         let last_scroll_top = 0;
         document.addEventListener('scroll', () => {
@@ -98,10 +123,47 @@ function init_autohide() {
             } else {
                 el_autohide.classList.remove('scrolled-up');
                 el_autohide.classList.add('scrolled-down');
+
+                let trigger = document.getElementById('share_dropdown')
+                bootstrap.Dropdown.getOrCreateInstance(trigger).hide()
             }
             last_scroll_top = scroll_top;
         });
     }
+}
+
+function fake_name_cli() {
+    let fake_cli_prompt = "#> "
+    let fake_cmd = "print(name)"
+    let name = "'Andrea Terenziani'".toUpperCase()
+
+    let nameHeader = document.querySelector("#nameHeader")
+    let target = `${fake_cli_prompt}${name}`
+
+    // cheap trick I know
+    nameHeader.textContent = fake_cli_prompt + "".padEnd(name.length, `\xa0`)
+
+    repeatInterval((i) => {
+            let s = nameHeader.textContent
+            let idx = i + fake_cli_prompt.length
+
+            s = s.replaceAt(idx, fake_cmd[0])
+
+            nameHeader.textContent = s
+            fake_cmd = fake_cmd.slice(1)
+        },
+        1000, 140, fake_cmd.length,
+        () => {
+            setTimeout(() => nameHeader.textContent = target, 1000)
+        })
+}
+
+String.prototype.replaceAt = function (index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -119,16 +181,5 @@ document.addEventListener("DOMContentLoaded", () => {
         classes.forEach(c => elem.classList.add(c))
     })
 
-    let nameHeader = document.querySelector("#nameHeader")
-    let fake_cli_prompt = "#> "
-    nameHeader.textContent = fake_cli_prompt
-    let name = "echo $NAME"
-    repeatInterval((i) => {
-            nameHeader.textContent += name[0]
-            name = name.slice(1)
-        },
-        1000, 120, name.length,
-        () => {
-            setTimeout(() => nameHeader.textContent = `${fake_cli_prompt}Andrea Terenziani`.toUpperCase(), 1000)
-        })
+    fake_name_cli()
 });

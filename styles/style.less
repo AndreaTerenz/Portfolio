@@ -2,7 +2,7 @@
 @import "keyframes";
 
 html * {
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 canvas {
@@ -26,13 +26,25 @@ a.anchor {
 
 .paragraph_title {
     font-weight: bold;
-    font-family: 'JetBrains Mono', monospace;
+    //font-family: 'JetBrains Mono', monospace;
+}
+
+.share_btn_social {
+    background-color: royalblue;
+    color: white;
+    font-size: 22px;
+    border: transparent 3px solid;
+
+    &:hover {
+        border: royalblue 3px solid;
+    }
 }
 
 .header {
     font-weight: bold;
     font-family: 'JetBrains Mono', monospace;
     text-shadow: 2px 2px 10px #222222;
+    text-align: center;
 }
 
 hr {
@@ -84,8 +96,14 @@ hr {
         transform: scale(1.1);
     }
 
-    * {
+    & * {
         text-align: center;
+    }
+}
+
+.btn-social {
+    :first-child {
+        //border-width: 0 !important;
     }
 }
 

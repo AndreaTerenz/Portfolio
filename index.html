@@ -11,6 +11,7 @@
     <!--Bootstrap-->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet">
     <script crossorigin="anonymous"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -26,13 +27,11 @@
     <link href="styles/style.less" rel="stylesheet/less" type="text/css"/>
     <link href="styles/bootstrap-social.css" rel="stylesheet">
 
-    <!--p5.js-->
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
-
     <!--Misc js-->
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/6a5ea18bdb.js"></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/f6e9918e00.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/repo-cards-better.js"></script>
+    <script src="scripts/contact-button.js"></script>
 
     <!--Less interpreter-->
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
@@ -42,7 +41,7 @@
 <body id="index-body">
 <nav class="autohide-nav navbar navbar-expand-md navbar-dark bg-dark fixed-top border-bottom border-2 border-white shadow">
     <div class="container-fluid">
-        <a class="navbar-brand me-2 ms-1 nav-button" href="index.html">
+        <a class="navbar-brand me-2 ms-1" href="index.html">
             <img class="py-auto" height="30" src="icons/favicon2.svg" width="30">
         </a>
         <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"
@@ -53,13 +52,53 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link nav-button" href="#About">About</a>
+                    <a class="nav-link " href="#About">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-button" href="#Projects">Projects</a>
+                    <a class="nav-link" href="#Projects">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-button" href="#Contacts">Contacts</a>
+                    <a class="nav-link" href="#Contacts">Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a aria-expanded="false" class="nav-link" data-bs-toggle="dropdown" href="#"
+                           id="share_dropdown" role="button">
+                            <i class="bi bi-share pe-2"></i>Share
+                        </a>
+
+                        <ul aria-labelledby="share_dropdown" class="dropdown-menu p-2">
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   href="https://pinterest.com/pin/create/button/?url=http://andreaterenz.software/&media=&description="
+                                   target="_blank"><i class="fa fa-copy p-2 w-100 text-center"></i></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider w-100 my-1">
+                            </li>
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   href="https://www.facebook.com/sharer/sharer.php?u=http://andreaterenz.software/"
+                                   target="_blank"><i class="fa fa-facebook w-100 text-center"></i></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider w-100 my-1">
+                            </li>
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   href="https://twitter.com/intent/tweet?url=http://andreaterenz.software/&text="
+                                   target="_blank"><i class="fa fa-twitter w-100 text-center"></i></a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider w-100 my-1">
+                            </li>
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   href="https://www.linkedin.com/shareArticle?mini=true&url=http://andreaterenz.software/"
+                                   target="_blank"><i class="fa fa-linkedin p-2 w-100 text-center"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -148,25 +187,17 @@
         <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
         <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
             <div class="col">
-                <a class="btn btn-lg btn-block btn-social btn-linkedin"
-                   href="https://www.linkedin.com/in/andrea-terenz/">
-                    <span class="fa fa-linkedin"></span> Linkedin
-                </a>
+                <a class="contact-button" href="https://www.linkedin.com/in/andrea-terenz/"></a>
             </div>
             <div class="col">
-                <a class="btn btn-lg btn-block btn-social btn-google" href="mailto:contact.me@andreaterenz.software">
-                    <span class="fa fa-envelope"></span> Email
-                </a>
+                <a class="contact-button" data-icon="envelope" data-social="google"
+                   href="mailto:contact.me@andreaterenz.software">Email</a>
             </div>
             <div class="col">
-                <a class="btn btn-lg btn-block btn-social btn-github" href="https://github.com/AndreaTerenz">
-                    <span class="fa fa-github"></span> GitHub
-                </a>
+                <a class="contact-button" href="https://www.github.com/AndreaTerenz">GitHub</a>
             </div>
             <div class="col">
-                <a class="btn btn-lg btn-block btn-social btn-twitter" href="https://twitter.com/AtTerenziani">
-                    <span class="fa fa-twitter"></span> Twitter
-                </a>
+                <a class="contact-button" href="https://www.twitter.com/AtTerenziani"></a>
             </div>
         </div>
     </div>
