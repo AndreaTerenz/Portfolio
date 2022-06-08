@@ -1,3 +1,29 @@
+String.prototype.replaceAt = function (index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+function cloneTemplate(t) {
+    let templ = undefined
+
+    if (typeof (t) === "string")
+        templ = document.querySelector(`#${t}`)
+    else if (typeof (t) === "object")
+        templ = t
+    else
+        return templ
+
+    return templ.content.firstElementChild.cloneNode(true)
+}
+
+function copyURLToClipboard() {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText("www.andreaterenz.software");
+}
+
 class Repo {
     static username = "AndreaTerenz"
 
@@ -17,30 +43,6 @@ const repos = [
     new Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "AndreaTerenz.github.io"),
 ]
 
-class ContactButton extends HTMLAnchorElement {
-    constructor() {
-        self = super();
-        console.log("AAAAAAAAAAAAAAAAAA")
-
-        document.addEventListener("DOMContentLoaded", () => {
-            this.classList.add("btn btn-lg btn-block btn-social")
-            let social = this.getAttribute("data-social")
-
-            if (social)
-                this.classList.add(`btn-${social}`)
-
-            let icon = this.getAttribute("data-fa-icon")
-            let sp = document.createElement("span")
-
-            if (icon)
-                sp.classList.add(`fa fa-${icon}`)
-            this.appendChild(sp)
-        })
-    }
-}
-
-customElements.define('contact-button', ContactButton, {extends: 'a'});
-
 function getAge(yy, mm, dd) {
     let today = new Date();
     let birthDate = new Date(yy, mm - 1, dd);
@@ -50,19 +52,6 @@ function getAge(yy, mm, dd) {
         age--;
     }
     return age;
-}
-
-function cloneTemplate(t) {
-    let templ = undefined
-
-    if (typeof (t) === "string")
-        templ = document.querySelector(`#${t}`)
-    else if (typeof (t) === "object")
-        templ = t
-    else
-        return templ
-
-    return templ.content.firstElementChild.cloneNode(true)
 }
 
 function repeatInterval(callback, delay, interval, repeats, callback_end) {
@@ -156,14 +145,6 @@ function fake_name_cli() {
         () => {
             setTimeout(() => nameHeader.textContent = target, 1000)
         })
-}
-
-String.prototype.replaceAt = function (index, replacement) {
-    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
-}
-
-String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

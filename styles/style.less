@@ -29,6 +29,11 @@ a.anchor {
     //font-family: 'JetBrains Mono', monospace;
 }
 
+.dropdown-menu {
+    animation: shareDrop 180ms ease-in-out forwards;
+    transform-origin: top center;
+}
+
 .share_btn_social {
     background-color: royalblue;
     color: white;
@@ -36,7 +41,11 @@ a.anchor {
     border: transparent 3px solid;
 
     &:hover {
-        border: royalblue 3px solid;
+        border-color: royalblue;
+    }
+
+    &:active {
+        border-color: transparent;
     }
 }
 
