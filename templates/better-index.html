@@ -1,3 +1,5 @@
+{% set PARAGRAPH_CLASSES = "py-3 px-0 px-sm-3 mx-auto mx-md-5" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +96,7 @@
     </div>
 </div>
 <div class="container-xl px-0 px-md-auto">
-    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+    <div class="row animateOnLoad section-div {{ PARAGRAPH_CLASSES }} shadow-lg">
         <a class="anchor" id="About"></a>
         <h2 class="row m-auto pb-3 paragraph_title">About me</h2>
         <div class="row m-auto">
@@ -122,7 +124,7 @@
         </div>
     </div>
 
-    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+    <div class="row animateOnLoad section-div {{ PARAGRAPH_CLASSES }} shadow-lg">
         <a class="anchor" id="Projects"></a>
         <h2 class="row m-auto pb-3 paragraph_title">My favorite projects</h2>
         <div class="row m-auto h-100">
@@ -170,7 +172,7 @@
         </div>
     </div>
 
-    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+    <div class="row animateOnLoad section-div {{ PARAGRAPH_CLASSES }} shadow-lg">
         <a class="anchor" id="Contacts"></a>
         <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
         <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
