@@ -6,11 +6,6 @@ String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-function copyURLToClipboard() {
-    /* Copy the text inside the text field */
-    navigator.clipboard.writeText("www.terenz.dev");
-}
-
 function repeatInterval(callback, delay, interval, repeats, callback_end) {
     setTimeout(() => {
         let i = 0

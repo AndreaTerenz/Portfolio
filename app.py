@@ -1,4 +1,3 @@
-import os
 from dataclasses import dataclass
 from datetime import date
 
@@ -64,8 +63,6 @@ def index():
     ]
 
     age = calculateAge(date(1999, 10, 30))
-
-    age = os.environ["TEST"]
 
     return flask.render_template("better-index.html",
                                  age=age,
