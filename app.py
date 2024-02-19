@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 
 import flask
 from flask import Flask
@@ -23,6 +24,13 @@ class Contact:
     icon: str = ""
     social: str = ""
     brand: bool = True
+
+
+def calculateAge(birthDate):
+    today = date.today()
+    age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
+
+    return age
 
 @app.route('/')
 def index():
@@ -54,7 +62,10 @@ def index():
         Contact("https://www.twitter.com/AtTerenziani", "Twitter", icon="x-twitter"),
     ]
 
+    age = calculateAge(date(1999, 10, 30))
+
     return flask.render_template("better-index.html",
+                                 age=age,
                                  share_socials=share_socials,
                                  about_logos=about_logos,
                                  repos=repos,
