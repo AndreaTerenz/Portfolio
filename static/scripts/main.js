@@ -6,33 +6,9 @@ String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-function cloneTemplate(t) {
-    let templ = undefined
-
-    if (typeof (t) === "string")
-        templ = document.querySelector(`#${t}`)
-    else if (typeof (t) === "object")
-        templ = t
-    else
-        return templ
-
-    return templ.content.firstElementChild.cloneNode(true)
-}
-
 function copyURLToClipboard() {
     /* Copy the text inside the text field */
     navigator.clipboard.writeText("www.terenz.dev");
-}
-
-function getAge(yy, mm, dd) {
-    let today = new Date();
-    let birthDate = new Date(yy, mm - 1, dd);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
 }
 
 function repeatInterval(callback, delay, interval, repeats, callback_end) {
