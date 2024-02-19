@@ -16,6 +16,14 @@ class Repo:
     description : str
     gh_name : str
 
+@dataclass
+class Contact:
+    link: str
+    name: str
+    icon: str = ""
+    social: str = ""
+    brand: bool = True
+
 @app.route('/')
 def index():
     share_socials = [
@@ -25,9 +33,9 @@ def index():
     ]
 
     about_logos = [
+        "6/6a/Godot_icon.svg",
         "9/99/Unofficial_JavaScript_logo_2.svg",
         "thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
-        "6/6a/Godot_icon.svg",
         "1/18/ISO_C%2B%2B_Logo.svg",
     ]
 
@@ -39,10 +47,18 @@ def index():
         Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "AndreaTerenz.github.io"),
     ]
 
+    contacts = [
+        Contact("mailto:contact.me@terenz.dev", "Email", icon="envelope", brand=False, social="google"),
+        Contact("https://www.linkedin.com/in/andrea-terenz/", "Linkedin"),
+        Contact("https://www.github.com/AndreaTerenz", "Github"),
+        Contact("https://www.twitter.com/AtTerenziani", "Twitter", icon="x-twitter"),
+    ]
+
     return flask.render_template("better-index.html",
                                  share_socials=share_socials,
                                  about_logos=about_logos,
-                                 repos=repos)
+                                 repos=repos,
+                                 contacts=contacts)
 
 
 if __name__ == '__main__':

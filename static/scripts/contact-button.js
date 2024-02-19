@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    return
     document.querySelectorAll('a.contact-button').forEach((el) => {
         el.classList.add(..."btn btn-lg btn-block btn-social text-left fw-bold".split(" "))
 
@@ -15,12 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let text = el.textContent
         let icon = el.getAttribute('data-icon')
 
-        if (!icon)
+        if (!icon) {
             icon = social
+        }
 
         if (!text)
             text = social.capitalize()
 
-        el.innerHTML = `<span class="fa fa-${icon}"></span>${text}`
+        brnds = (text !== "Email") ? "fa-brands" : ""
+        el.innerHTML = `<span class="fa ${brnds} fa-${icon}"></span>${text}`
     })
 })

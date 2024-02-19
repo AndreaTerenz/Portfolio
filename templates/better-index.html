@@ -28,10 +28,10 @@
     <link href="{{ url_for('static', filename='styles/bootstrap-social.css') }}" rel="stylesheet">
 
     <!--Misc js-->
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/f6e9918e00.js"></script>
+    <script src="https://kit.fontawesome.com/bac47486c5.js" crossorigin="anonymous"></script>
     <script src="../static/scripts/main.js"></script>
     <script src="../static/scripts/repo-cards-better.js"></script>
-    <script src="../static/scripts/contact-button.js"></script>
+    {#<script src="../static/scripts/contact-button.js"></script>#}
 
     <!--Less interpreter-->
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
@@ -174,19 +174,15 @@
         <a class="anchor" id="Contacts"></a>
         <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
         <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
+            {% for contact in contacts %}
             <div class="col">
-                <a class="contact-button" href="https://www.linkedin.com/in/andrea-terenz/"></a>
+                <a class="btn btn-lg btn-block btn-social text-left fw-bold btn-{{ contact.social if contact.social != "" else contact.name | lower }}"
+                   href="{{contact.link}}">
+                    <span class="fa {{ 'fa-brands' if contact.brand }} fa-{{ contact.icon if contact.icon != "" else contact.name | lower }}"></span>
+                    {{ contact.name }}
+                </a>
             </div>
-            <div class="col">
-                <a class="contact-button" data-icon="envelope" data-social="google"
-                   href="mailto:contact.me@andreaterenz.software">Email</a>
-            </div>
-            <div class="col">
-                <a class="contact-button" href="https://www.github.com/AndreaTerenz">GitHub</a>
-            </div>
-            <div class="col">
-                <a class="contact-button" href="https://www.twitter.com/AtTerenziani"></a>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
