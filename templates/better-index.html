@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="#3939a7" media="(prefers-color-scheme: light)" name="theme-color">
+    <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="../static/icons/favicon2.svg" rel="icon" type="image/svg">
+
+    <!--Bootstrap-->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--Local styles-->
+    <link href="{{ url_for('static', filename='styles/style.less') }}" rel="stylesheet/less" type="text/css"/>
+    <link href="{{ url_for('static', filename='styles/bootstrap-social.css') }}" rel="stylesheet">
+
+    <!--Misc js-->
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/f6e9918e00.js"></script>
+    <script src="../static/scripts/main.js"></script>
+    <script src="../static/scripts/repo-cards-better.js"></script>
+    <script src="../static/scripts/contact-button.js"></script>
+
+    <!--Less interpreter-->
+    <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
+
+    <title>AndreaTerenz</title>
+</head>
+<body id="index-body">
+<nav class="autohide-nav navbar navbar-expand-md navbar-dark bg-dark fixed-top border-bottom border-2 border-white shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand me-2 ms-1" href="index.html">
+            <img class="py-auto" height="30" src="../static/icons/favicon2.svg" width="30">
+        </a>
+        <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarColor02" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                {% for section in ["About", "Projects", "Contacts"] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#{{ section }}">{{ section }}</a>
+                </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a aria-expanded="false" class="nav-link" data-bs-toggle="dropdown" href="#"
+                           id="share_dropdown" role="button">
+                            <i class="fa fa-share-nodes pe-2"></i>Share
+                        </a>
+
+                        <ul aria-labelledby="share_dropdown" class="dropdown-menu px-3 py-2">
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   onclick="copyURLToClipboard()"
+                                   target="_blank"><i class="fa fa-copy p-2 w-100 text-center"></i></a>
+                            </li>
+                            {% for social in share_socials %}
+                            <li>
+                                <hr class="dropdown-divider w-100 my-1">
+                            </li>
+                            <li>
+                                <a class="dropdown-item share_btn_social rounded"
+                                   href="{{ social.link }}"
+                                   target="_blank"><i class="fa fa-{{ social.name }} w-100 text-center"></i></a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="animateOnLoad px-4 py-5 my-5 text-center text-light">
+    <h1 class="typewriter header" id="nameHeader">Andrea Terenziani</h1>
+    <hr class="shadow-lg" style="height: 3px;">
+    <div class="col-lg-6 mx-auto" id="subtitle">
+        <p class="lead mb-4">Software developer</p>
+    </div>
+</div>
+<div class="container-xl px-0 px-md-auto">
+    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+        <a class="anchor" id="About"></a>
+        <h2 class="row m-auto pb-3 paragraph_title">About me</h2>
+        <div class="row m-auto">
+            <div class="col-12 col-lg-4 mx-auto my-4 px-0 align-content-center">
+                <img alt="my face" class="row m-auto img-fluid shadow-lg" src="../static/images/photo.png">
+            </div>
+            <div class="col-12 col-lg-8 ps-lg-5 m-auto">
+                <div class="figure-caption text-center">Pronouns: He/Him</div>
+                <div class="py-4 about-text">
+                    I'm a <a id="age">99</a> year old CS student at the University of Modena and Reggio Emilia in Italy
+                    with a passion for coding. I've tinkered with stuff from Pascal to Processing, from C++ to Godot
+                    (great fan btw), from Bash to Python; but don't take me as an expert on everything. Right now I'm
+                    most interested in game and web development, and after my Bachelor degree I'd like to take a
+                    Master's
+                    degree in Artificial Intelligence
+                </div>
+
+                <div class="row px-4 px-sm-0 justify-content-around">
+                    {% for image in about_logos %}
+                    <img class="col-6 col-sm-2 px-auto"
+                         src="https://upload.wikimedia.org/wikipedia/commons/{{ image }}">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+        <a class="anchor" id="Projects"></a>
+        <h2 class="row m-auto pb-3 paragraph_title">My favorite projects</h2>
+        <div class="row m-auto h-100">
+            <div class="carousel slide carousel-fade col-12 col-lg-6 mx-auto" data-bs-interval="false"
+                 data-bs-ride="carousel"
+                 id="reposCarousel">
+                <div class="carousel-indicators" id="carousel-indicators-parent">
+                    {% for i in range(repos | length) %}
+                        <button aria-label="Slide {{ i }}"
+                                data-bs-slide-to="{{ i }}"
+                                data-bs-target="#reposCarousel"
+                                {% if i == 0%}
+                                class="active"
+                                {% endif %}
+                                type="button"></button>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="carousel-inner" id="repo-card-inner">
+                        {% for repo in repos %}
+                        <div class="carousel-item repo-card {{ 'active' if loop.index0 == 0 }}"
+                             data-theme="dark-theme"
+                             data-repo="AndreaTerenz/{{ repo.gh_name }}"
+                             data-display-name="{{ repo.display_name }}"
+                             data-description="{{ repo.description }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <button class="carousel-control carousel-control-prev" data-bs-slide="prev"
+                            data-bs-target="#reposCarousel"
+                            type="button">
+                        <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control carousel-control-next" data-bs-slide="next"
+                            data-bs-target="#reposCarousel"
+                            type="button">
+                        <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row animateOnLoad section-div _paragraph_ shadow-lg">
+        <a class="anchor" id="Contacts"></a>
+        <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
+        <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
+            <div class="col">
+                <a class="contact-button" href="https://www.linkedin.com/in/andrea-terenz/"></a>
+            </div>
+            <div class="col">
+                <a class="contact-button" data-icon="envelope" data-social="google"
+                   href="mailto:contact.me@andreaterenz.software">Email</a>
+            </div>
+            <div class="col">
+                <a class="contact-button" href="https://www.github.com/AndreaTerenz">GitHub</a>
+            </div>
+            <div class="col">
+                <a class="contact-button" href="https://www.twitter.com/AtTerenziani"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

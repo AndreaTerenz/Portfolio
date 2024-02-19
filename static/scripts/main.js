@@ -2,10 +2,6 @@ String.prototype.replaceAt = function (index, replacement) {
     return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
 
-String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
-
 function cloneTemplate(t) {
     let templ = undefined
 
@@ -24,7 +20,7 @@ function copyURLToClipboard() {
     navigator.clipboard.writeText("www.andreaterenz.software");
 }
 
-class Repo {
+/*class Repo {
     static username = "AndreaTerenz"
 
     constructor(display_name, description, gh_name) {
@@ -41,7 +37,7 @@ const repos = [
     new Repo("p5 Pong", "Pong clone made with p5.js and Node.js", "p5-pong"),
     new Repo("GodotMaze", "A demonstration of some maze generation algorithms made with Godot", "GodotMaze"),
     new Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "AndreaTerenz.github.io"),
-]
+]*/
 
 function getAge(yy, mm, dd) {
     let today = new Date();
@@ -71,19 +67,19 @@ function repeatInterval(callback, delay, interval, repeats, callback_end) {
 }
 
 function init_repos() {
-    let indicatorsTemplate = document.querySelector("#carousel-indicators-template").content
-    let indicatorsParent = document.querySelector("#carousel-indicators-parent")
-    let reposParent = document.querySelector("#repo-car-inner")
+    //let indicatorsTemplate = document.querySelector("#carousel-indicators-template").content
+    //let indicatorsParent = document.querySelector("#carousel-indicators-parent")
+    let reposParent = document.querySelector("#repo-card-inner")
     let reposTemplate = document.querySelector("#repo-template")
 
     repos.forEach((r, i) => {
-        let indicatorClone = indicatorsTemplate.cloneNode(true)
-        let btn = indicatorClone.querySelector("button")
+        //let indicatorClone = indicatorsTemplate.cloneNode(true)
+        //let btn = indicatorClone.querySelector("button")
 
-        btn.setAttribute("data-bs-slide-to", i)
-        btn.setAttribute("aria-label", `Slide ${i}`)
+        //btn.setAttribute("data-bs-slide-to", i)
+        //btn.setAttribute("aria-label", `Slide ${i}`)
 
-        indicatorsParent.appendChild(btn)
+        //indicatorsParent.appendChild(btn)
 
         let repoCard = cloneTemplate(reposTemplate)
         repoCard.setAttribute("data-repo", `${Repo.username}/${r.gh_name}`)
@@ -91,7 +87,7 @@ function init_repos() {
         repoCard.setAttribute("data-description", `${r.description}`)
 
         if (i === 0) {
-            btn.classList.add("active")
+            //btn.classList.add("active")
             repoCard.classList.add("active")
         }
 
@@ -148,7 +144,7 @@ function fake_name_cli() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    init_repos()
+    //init_repos()
     init_autohide()
 
     //Dinamically set the age
