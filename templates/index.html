@@ -80,20 +80,18 @@
                         </a>
 
                         <ul aria-labelledby="share_dropdown" class="dropdown-menu px-3 py-2">
-                            <li>
-                                <a class="dropdown-item share_btn_social rounded"
-                                   onclick="navigator.clipboard.writeText('{{ request.url }}')"
-                                   target="_blank">
-                                    <i class="bi bi-copy w-100 text-center"></i>
-                                </a>
-                            </li>
                             {% for social in share_socials %}
+                            {% if loop.index > 1 %}
+                            <li><hr class="dropdown-divider w-100 my-1"></li>
+                            {% endif %}
                             <li>
-                                <hr class="dropdown-divider w-100 my-1">
-                            </li>
-                            <li>
-                                <a class="dropdown-item share_btn_social rounded"
+                                <a class="dropdown-item share_btn_social rounded d-flex"
+                                   {% if social.name != "copy" %}
                                    href="{{ social.link }}"
+                                   {% else %}
+                                   {# Not really a link in this case shhhhhhh #}
+                                   onclick="{{ social.link }}"
+                                   {% endif %}
                                    target="_blank">
                                     <i class="bi bi-{{ social.name }} w-100 text-center"></i>
                                 </a>

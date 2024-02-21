@@ -78,9 +78,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     share_socials = [
+        ShareSocial("copy", f"navigator.clipboard.writeText('{request.url}')"),
         ShareSocial("facebook", f"https://www.facebook.com/sharer/sharer.php?u={request.url}"),
-        ShareSocial("twitter", f"https://twitter.com/intent/tweet?url={request.url}&text="),
         ShareSocial("linkedin", f"https://www.linkedin.com/shareArticle?mini=true&url={request.url}"),
+        ShareSocial("twitter", f"https://twitter.com/intent/tweet?url={request.url}&text="),
     ]
 
     about_logos = [
