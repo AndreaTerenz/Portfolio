@@ -1,7 +1,7 @@
 # AndreaTerenz.github.io
 
 <p align="center">
-  <img src="static/icons/new/favicon-base.png" alt="site favicon"/>
+  <img src="static/icons/favicon-base.png" alt="site favicon"/>
 </p>
 
 Welcome to my personal portfolio website.

@@ -1,21 +1,59 @@
 from dataclasses import dataclass
 from datetime import date
-
+import requests
 import flask
-from flask import Flask, send_from_directory, request
+from flask import Flask, request
 
-app = Flask(__name__)
+def get_request(url):
+    r = requests.get(url)
+
+    assert r.status_code == 200, f"Status: {r.status_code} - URL: {url}"
+    return r.json()
+
+GH_LANG_COLORS = get_request("https://raw.githubusercontent.com/ozh/github-colors/master/colors.json")
+GH_LANG_COLORS = { lang : GH_LANG_COLORS[lang]["color"] for lang in GH_LANG_COLORS }
+
+@dataclass
+class Repo:
+    gh_name : str
+    display_name : str = ""
+    description : str = ""
+    data : dict = None
+
+    def __post_init__(self):
+        self.reload()
+
+    #FIXME: DO THIS EVERY 60 MINS (otherwise the data may be stale)
+    def reload(self):
+        self.data = get_request(f"https://api.github.com/repos/AndreaTerenz/{self.gh_name}")
+
+        if self.description != "":
+            self.data["description"] = self.description
+
+        self.data["name"] = self.display_name if self.display_name != "" else self.gh_name
+
+        lang = self.data.get("language", "")
+        self.data["lang_color"] = GH_LANG_COLORS[lang] if lang else ""
+
+print("Loading repos data...", end="")
+repos = [
+    Repo("Nameless", display_name="Nameless",
+         description="FPS prototype game made with Godot"),
+    Repo("Advent-of-Code-2020", display_name="AoC 2020",
+         description="Some of my solutions for the 2020 Advent of Code challenges"),
+    Repo("p5-pong", display_name="p5 Pong",
+         description="Pong clone made with p5.js and Node.js"),
+    Repo("GodotMaze", display_name="GodotMaze",
+         description="A demonstration of some maze generation algorithms made with Godot"),
+    Repo("Portfolio", display_name="This very website",
+         description="This portfolio website, made with Bootstrap 5 and Less"),
+]
+print("done")
 
 @dataclass
 class ShareSocial:
     name: str
     link: str
-
-@dataclass
-class Repo:
-    display_name : str
-    description : str
-    gh_name : str
 
 @dataclass
 class Contact:
@@ -31,17 +69,7 @@ def calculateAge(birthDate):
 
     return age
 
-@app.route("/static/icons/new/<path:filename>")
-def newicons(filename):
-    return send_from_directory(app.static_folder, f"icons/new/{filename}")
-
-@app.route("/static/scripts/<path:filename>")
-def scripts(filename):
-    return send_from_directory(app.static_folder, f"scripts/{filename}")
-
-@app.route("/static/styles/<path:filename>")
-def styles(filename):
-    return send_from_directory(app.static_folder, f"styles/{filename}")
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -56,14 +84,6 @@ def index():
         "9/99/Unofficial_JavaScript_logo_2.svg",
         "thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
         "1/18/ISO_C%2B%2B_Logo.svg",
-    ]
-
-    repos = [
-        Repo("Nameless", "FPS prototype game made with Godot", "Nameless"),
-        Repo("AoC 2020", "Some of my solutions for the 2020 Advent of Code challenges", "Advent-of-Code-2020"),
-        Repo("p5 Pong", "Pong clone made with p5.js and Node.js", "p5-pong"),
-        Repo("GodotMaze", "A demonstration of some maze generation algorithms made with Godot", "GodotMaze"),
-        Repo("This very website", "This portfolio website, made with Bootstrap 5 and Less", "Portfolio"),
     ]
 
     contacts = [
