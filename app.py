@@ -5,6 +5,9 @@ import requests
 import flask
 from flask import Flask, request
 
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
+
 def get_request(url):
     r = requests.get(url)
 
@@ -103,13 +106,18 @@ def index():
                                  repos=repos,
                                  contacts=contacts)
 
-@app.route('/api/cron/reload-repos')
 def reload_repos():
-    secret = os.environ.get("CRON_SECRET", -1)
-    if secret != -1 and request.headers.get('Authorization') != f"Bearer {os.environ['CRON_SECRET']}":
-        return "I AIN'T RELOADING REPOS FOR YOU, BUSTER", 403
+    print("Reloading repos...", end="")
+    for r in repos:
+        r.reload()
+    print("done")
 
-    return "Reloading repos...", 200
+REPO_RELOAD_TIMEOUT = 15
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=reload_repos, trigger="interval", seconds=REPO_RELOAD_TIMEOUT*60)
+scheduler.start()
+
+atexit.register(lambda: scheduler.shutdown())
 
 if __name__ == '__main__':
     app.run()
