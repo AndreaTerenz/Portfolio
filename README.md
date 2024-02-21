@@ -1,14 +1,18 @@
 # AndreaTerenz.github.io
 
 <p align="center">
-  <img src="static/icons/favicon2.svg" width=80 alt="site favicon"/>
+  <img src="static/icons/new/favicon-base.png" alt="site favicon"/>
 </p>
 
 Welcome to my personal portfolio website.
 
 ## Tools used
 
-- standard JS/CSS/HTML (duh)
+### Client side
+
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 - [Less](https://lesscss.org/)
-- [Font Awesome](https://fontawesome.com/icons/) icons
+
+### Server side
+
+Just a simple [Flask](https://flask.palletsprojects.com/en/3.0.x/) server
