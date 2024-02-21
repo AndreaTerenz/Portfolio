@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 from datetime import date
 import requests
@@ -102,6 +103,13 @@ def index():
                                  repos=repos,
                                  contacts=contacts)
 
+@app.route('/api/cron/reload-repos')
+def reload_repos():
+    secret = os.environ.get("CRON_SECRET", -1)
+    if secret != -1 and request.headers.get('Authorization') != f"Bearer {os.environ['CRON_SECRET']}":
+        return "I AIN'T RELOADING REPOS FOR YOU, BUSTER", 403
+
+    return "Reloading repos...", 200
 
 if __name__ == '__main__':
     app.run()
