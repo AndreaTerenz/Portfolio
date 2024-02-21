@@ -5,5 +5,9 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/app.py" }
-  ]
+  ],
+  "crons": [{
+    "path": "/api/cron/reload-repos",
+    "schedule": "*/1 * * * *"
+  }]
 }
