@@ -27,7 +27,6 @@ class Repo:
     def __post_init__(self):
         self.reload()
 
-    #FIXME: DO THIS EVERY 60 MINS (otherwise the data may be stale)
     def reload(self):
         self.data = get_request(f"https://api.github.com/repos/AndreaTerenz/{self.gh_name}")
 
@@ -115,7 +114,9 @@ def reload_repos():
 
 REPO_RELOAD_TIMEOUT = 15
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=reload_repos, trigger="interval", seconds=REPO_RELOAD_TIMEOUT*60)
+scheduler.add_job(func=reload_repos,
+                  trigger="interval",
+                  seconds=REPO_RELOAD_TIMEOUT*60)
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown())
