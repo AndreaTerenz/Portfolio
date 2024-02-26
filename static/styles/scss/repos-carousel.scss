@@ -3,10 +3,10 @@
     border-radius: 6px;
 
     .repo-card {
-        @padding: 60px;
-        padding: 0 (@padding);
+        $padding: 60px;
+        padding: 0 ($padding);
 
-        @font-size: 20px;
+        $font-size: 20px;
 
         .repo-card-background {
             min-height: 200px;
@@ -14,21 +14,21 @@
         }
 
         .repo-card-icon {
-            width: @font-size;
-            height: @font-size;
+            width: $font-size;
+            height: $font-size;
         }
 
         .repo-card-name {
-            font-size: (@font-size) !important;
+            font-size: ($font-size) !important;
         }
 
         .repo-card-description {
-            font-size: (@font-size * .9) !important;
+            font-size: ($font-size * .9) !important;
             color: whitesmoke !important;
         }
 
         .repo-card-language, .repo-card-starred-count {
-            font-size: (@font-size * .7) !important;
+            font-size: ($font-size * .7) !important;
         }
     }
 }

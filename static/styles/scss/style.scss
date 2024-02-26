@@ -1,3 +1,5 @@
+@import "../../boostrap-scss/scss/bootstrap";
+@import "../css/bootstrap-social";
 @import "repos-carousel";
 @import "keyframes";
 
@@ -26,6 +28,10 @@ a.anchor {
 
 .paragraph_title {
     font-weight: bold;
+}
+
+.paragraph {
+    @extend .row, .section-div, .py-3, .px-0, .px-sm-3, .mx-auto, .mx-md-5, .shadow-lg, .animateOnLoad
 }
 
 .dropdown-menu {

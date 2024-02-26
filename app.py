@@ -1,17 +1,23 @@
-import os
 from dataclasses import dataclass
 from datetime import date
 import requests
 import flask
 from flask import Flask, request
+from sassutils.wsgi import SassMiddleware
 
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 
+app = Flask(__name__)
+app.wsgi_app = SassMiddleware(app.wsgi_app, {
+    __name__: ('static/styles/scss',
+               'static/styles/css/compiled-scss',
+               'static/styles/css/compiled-scss')
+})
+
 def get_request(url):
     r = requests.get(url)
 
-    assert r.status_code == 200, f"Status: {r.status_code} - URL: {url}"
     return r.json()
 
 GH_LANG_COLORS = get_request("https://raw.githubusercontent.com/ozh/github-colors/master/colors.json")
@@ -71,8 +77,6 @@ def calculateAge(birthDate):
     age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
 
     return age
-
-app = Flask(__name__)
 
 @app.route('/')
 def index():
