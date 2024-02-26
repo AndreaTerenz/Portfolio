@@ -10,9 +10,11 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 app.wsgi_app = SassMiddleware(app.wsgi_app, {
-    __name__: ('static/styles/scss',
-               'static/styles/css/compiled-scss',
-               'static/styles/css/compiled-scss')
+    __name__: {
+        "sass_path": 'static/styles/scss',
+        "css_path": 'static/styles/css/compiled-scss',
+        "strip_extension": True
+    }
 })
 
 def get_request(url):
