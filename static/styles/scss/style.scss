@@ -31,7 +31,7 @@ a.anchor {
 }
 
 .paragraph {
-    @extend .row, .section-div, .py-3, .px-0, .px-sm-3, .mx-auto, .mx-md-5, .shadow-lg, .animateOnLoad
+    @extend .row, .section-div, .py-3, .px-0, .px-sm-3, .mx-auto, .mx-md-5, .shadow-lg, .animateOnLoad;
 }
 
 .dropdown-menu {

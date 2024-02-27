@@ -1,21 +1,25 @@
+import os.path
 from dataclasses import dataclass
 from datetime import date
 import requests
 import flask
-from flask import Flask, request
-from sassutils.wsgi import SassMiddleware
+from flask import Flask, request, send_from_directory
+import sass
 
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 
-app = Flask(__name__)
-app.wsgi_app = SassMiddleware(app.wsgi_app, {
-    __name__: {
-        "sass_path": 'static/styles/scss',
-        "css_path": 'static/styles/css/compiled-scss',
-        "strip_extension": True
-    }
-})
+print("Compiling SCSS...", end="")
+STYLES_BASE = "static/styles"
+SCSS_STYLES = f"{STYLES_BASE}/scss"
+COMP_CSS = f"{STYLES_BASE}/css/compiled-scss"
+MAIN_STYLE_FILE = "style.scss"
+
+s = sass.compile(filename=f"{SCSS_STYLES}/{MAIN_STYLE_FILE}",
+                 output_style="compressed",)
+with open(f'{COMP_CSS}/{MAIN_STYLE_FILE}.css', "w") as o:
+    o.write(s)
+print("done")
 
 def get_request(url):
     r = requests.get(url)
@@ -80,6 +84,23 @@ def calculateAge(birthDate):
 
     return age
 
+def reload_repos():
+    print("Reloading repos...", end="")
+    for r in repos:
+        r.reload()
+    print("done")
+
+REPO_RELOAD_TIMEOUT = 15
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=reload_repos,
+                  trigger="interval",
+                  seconds=REPO_RELOAD_TIMEOUT*60)
+scheduler.start()
+
+atexit.register(lambda: scheduler.shutdown())
+
+app = Flask(__name__)
+
 @app.route('/')
 def index():
     share_socials = [
@@ -112,20 +133,9 @@ def index():
                                  repos=repos,
                                  contacts=contacts)
 
-def reload_repos():
-    print("Reloading repos...", end="")
-    for r in repos:
-        r.reload()
-    print("done")
-
-REPO_RELOAD_TIMEOUT = 15
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=reload_repos,
-                  trigger="interval",
-                  seconds=REPO_RELOAD_TIMEOUT*60)
-scheduler.start()
-
-atexit.register(lambda: scheduler.shutdown())
+@app.route("/scss/<path:scss_file>")
+def scss(scss_file: str):
+    return send_from_directory(COMP_CSS, f"{scss_file}.css")
 
 if __name__ == '__main__':
     app.run()

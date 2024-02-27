@@ -5,7 +5,7 @@
     {{ url_for('static', filename='styles/'~file) }}
 {% endmacro %}
 {% macro get_scss(file) %}
-    {{ get_style('css/compiled-scss/'~file) }}
+    {{ url_for('scss', scss_file=file) }}
 {% endmacro %}
 {% macro get_script(file) %}
     {{ url_for('static', filename='scripts/'~file) }}
@@ -125,7 +125,6 @@
                     in the field of game development, using Unity and especially Godot, an open source game engine which
                     I've used quite extensively.
                 </div>
-
                 <div class="row px-4 px-sm-0 justify-content-around">
                     {% for image in about_logos %}
                     <img class="col-6 col-sm-2 px-auto"
@@ -136,10 +135,10 @@
         </div>
     </div>
 
-    <div class=".paragraph">
+    <div class="{{ PARAGRAPH_CLASSES }}">
         <a class="anchor" id="Projects"></a>
         <h2 class="row m-auto pb-3 paragraph_title">My favorite projects</h2>
-        <div class="row m-auto h-100">
+        <div class="row m-auto">
             <div class="carousel slide carousel-fade col-12 col-lg-6 mx-auto"
                  data-bs-interval="false"
                  id="reposCarousel">
@@ -183,7 +182,7 @@
         </div>
     </div>
 
-    <div class=".paragraph">
+    <div class="{{ PARAGRAPH_CLASSES }}">
         <a class="anchor" id="Contacts"></a>
         <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
         <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
