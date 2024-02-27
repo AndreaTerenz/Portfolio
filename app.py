@@ -17,7 +17,7 @@ MAIN_STYLE_FILE = "style.scss"
 
 s = sass.compile(filename=f"{SCSS_STYLES}/{MAIN_STYLE_FILE}",
                  output_style="compressed",)
-with open(f'{COMP_CSS}/{MAIN_STYLE_FILE}.css', "w") as o:
+with open(f'{COMP_CSS}/{MAIN_STYLE_FILE}.css', "w+") as o:
     o.write(s)
 print("done")
 
