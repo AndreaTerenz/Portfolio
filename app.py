@@ -77,6 +77,17 @@ class Contact:
     icon: str = ""
     social: str = ""
 
+@dataclass
+class Paragraph:
+    id: str
+    title: str
+    template_file: str = ""
+
+    def __post_init__(self):
+        if self.template_file != "":
+            return
+
+        self.template_file = f"{self.id.lower()}.jinja"
 
 def calculateAge(birthDate):
     today = date.today()
@@ -124,6 +135,12 @@ def index():
         Contact("https://www.twitter.com/AtTerenziani", "Twitter", icon="twitter-x"),
     ]
 
+    paragraphs = [
+        Paragraph("About", "About me"),
+        Paragraph("Projects", "My favorite projects"),
+        Paragraph("Contacts", "Contacts")
+    ]
+
     age = calculateAge(date(1999, 10, 30))
 
     return flask.render_template("index.html",
@@ -131,7 +148,8 @@ def index():
                                  share_socials=share_socials,
                                  about_logos=about_logos,
                                  repos=repos,
-                                 contacts=contacts)
+                                 contacts=contacts,
+                                 paragraphs=paragraphs)
 
 @app.route("/scss/<path:scss_file>")
 def scss(scss_file: str):

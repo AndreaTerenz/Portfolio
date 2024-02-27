@@ -1,0 +1,40 @@
+<div class="carousel slide carousel-fade col-12 col-lg-6 mx-auto"
+     data-bs-interval="false"
+     id="reposCarousel">
+    <div class="carousel-indicators">
+        {% for i in range(repos | length) %}
+            <button aria-label="Slide {{ i }}"
+                    data-bs-slide-to="{{ i }}"
+                    data-bs-target="#reposCarousel"
+                    class="{{ 'active' if loop.index0 == 0 }}"
+                    type="button"></button>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="carousel-inner">
+            {% for repo in repos %}
+                <div class="carousel-item repo-card {{ 'active' if loop.index0 == 0 }}">
+                    {% with data=repo.data %}
+                        {% include "repo-card.jinja" %}
+                    {% endwith %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="carousel-control carousel-control-prev"
+                data-bs-slide="prev"
+                data-bs-target="#reposCarousel"
+                type="button">
+            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control carousel-control-next"
+                data-bs-slide="next"
+                data-bs-target="#reposCarousel"
+                type="button">
+            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>

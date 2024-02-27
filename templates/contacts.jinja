@@ -1,0 +1,9 @@
+{% for contact in contacts %}
+<div class="col">
+    <a class="btn btn-lg btn-block btn-social text-left fw-bold btn-{{ contact.social if contact.social != "" else contact.name | lower }}"
+       href="{{contact.link}}">
+        <span class="bi bi-{{ contact.icon if contact.icon != "" else contact.name | lower }}"></span>
+        {{ contact.name }}
+    </a>
+</div>
+{% endfor %}

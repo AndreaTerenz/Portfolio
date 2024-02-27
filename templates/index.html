@@ -11,8 +11,6 @@
     {{ url_for('static', filename='scripts/'~file) }}
 {% endmacro %}
 
-{% set PARAGRAPH_CLASSES = ".row, .section-div, .py-3, .px-0, .px-sm-3, .mx-auto, .mx-md-5, .shadow-lg, .animateOnLoad" | replace(".", "") | replace(",", "") %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,9 +60,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
-                {% for section in ["About", "Projects", "Contacts"] %}
+                {% for par in paragraphs %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#{{ section }}">{{ section }}</a>
+                    <a class="nav-link" href="#{{ par.id }}">{{ par.id }}</a>
                 </li>
                 {% endfor %}
                 <li class="nav-item">
@@ -99,6 +97,7 @@
         </div>
     </div>
 </nav>
+
 <div class="animateOnLoad px-4 py-5 my-5 text-center text-light">
     <h1 class="typewriter header" id="nameHeader">Andrea Terenziani</h1>
     <hr class="shadow-lg" style="height: 3px;">
@@ -106,98 +105,19 @@
         <p class="lead mb-4">Software developer</p>
     </div>
 </div>
+
 <div class="container-xl px-0 px-md-auto">
-    <div class="{{ PARAGRAPH_CLASSES }}">
-        <a class="anchor" id="About"></a>
-        <h2 class="row m-auto pb-3 paragraph_title">About me</h2>
-        <div class="row m-auto">
-            <div class="col-12 col-lg-4 mx-auto my-4 px-0 align-content-center">
-                <img alt="my face" class="row m-auto img-fluid shadow-lg" src="{{ url_for('static', filename='images/photo.png') }}">
-            </div>
-            <div class="col-12 col-lg-8 ps-lg-5 m-auto">
-                <div class="figure-caption text-center">Pronouns: He/Him</div>
-                <div class="py-4 about-text">
-                    I'm a {{ age }} y.o. CS student at the University of Bologna in Italy, doing my Msc in Artificial Intelligence.
-                    I have been coding since I was 14, starting with C/Cpp, since they were part of my high school curriculum.
-                    I then expanded on what I was being taught and begun many small personal projects, starting with Pascal;
-                    as of today, I have experience, not just curricularly, in Python (mostly libraries such as Tensorflow or
-                    Keras), JavaScript, C#, CSS (specifically with Bootstrap 5) and HTML; furthermore, I've made many projects
-                    in the field of game development, using Unity and especially Godot, an open source game engine which
-                    I've used quite extensively.
-                </div>
-                <div class="row px-4 px-sm-0 justify-content-around">
-                    {% for image in about_logos %}
-                    <img class="col-6 col-sm-2 px-auto"
-                         src="https://upload.wikimedia.org/wikipedia/commons/{{ image }}">
-                    {% endfor %}
-                </div>
-            </div>
+    {% for par in paragraphs %}
+    <div class="row section-div py-3 px-0 px-sm- .mx-auto mx-md-5 shadow-lg animateOnLoad">
+        <a class="anchor" id="{{ par.id }}"></a>
+        <h2 class="row m-auto {{ 'pb-3' if par.id != "About" }} px-4 text-center paragraph_title">{{ par.title }}</h2>
+        <div class="row m-auto {{ 'text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto' if par.id == "Contacts" }}">
+            {% include par.template_file %}
         </div>
     </div>
-
-    <div class="{{ PARAGRAPH_CLASSES }}">
-        <a class="anchor" id="Projects"></a>
-        <h2 class="row m-auto pb-3 paragraph_title">My favorite projects</h2>
-        <div class="row m-auto">
-            <div class="carousel slide carousel-fade col-12 col-lg-6 mx-auto"
-                 data-bs-interval="false"
-                 id="reposCarousel">
-                <div class="carousel-indicators">
-                    {% for i in range(repos | length) %}
-                        <button aria-label="Slide {{ i }}"
-                                data-bs-slide-to="{{ i }}"
-                                data-bs-target="#reposCarousel"
-                                class="{{ 'active' if loop.index0 == 0 }}"
-                                type="button"></button>
-                    {% endfor %}
-                </div>
-                <div class="row">
-                    <div class="carousel-inner">
-                        {% for repo in repos %}
-                        <div class="carousel-item repo-card {{ 'active' if loop.index0 == 0 }}">
-                            {% with data=repo.data %}
-                            {% include "repo-card.jinja" %}
-                            {% endwith %}
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <button class="carousel-control carousel-control-prev"
-                            data-bs-slide="prev"
-                            data-bs-target="#reposCarousel"
-                            type="button">
-                        <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-
-                    <button class="carousel-control carousel-control-next"
-                            data-bs-slide="next"
-                            data-bs-target="#reposCarousel"
-                            type="button">
-                        <span aria-hidden="true" class="carousel-control-next-icon"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="{{ PARAGRAPH_CLASSES }}">
-        <a class="anchor" id="Contacts"></a>
-        <h2 class="row m-auto pb-3 paragraph_title">Contacts</h2>
-        <div class="row m-auto text-center fs-5 gy-2 justify-content-around row-cols-1 row-cols-sm-2 row-cols-lg-auto">
-            {% for contact in contacts %}
-            <div class="col">
-                <a class="btn btn-lg btn-block btn-social text-left fw-bold btn-{{ contact.social if contact.social != "" else contact.name | lower }}"
-                   href="{{contact.link}}">
-                    <span class="bi bi-{{ contact.icon if contact.icon != "" else contact.name | lower }}"></span>
-                    {{ contact.name }}
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
 {# HAS TO BE HERE #}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
