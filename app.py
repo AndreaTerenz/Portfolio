@@ -15,10 +15,11 @@ SCSS_STYLES = f"{STYLES_BASE}/scss"
 COMP_CSS = f"{STYLES_BASE}/css/compiled-scss"
 MAIN_STYLE_FILE = "style.scss"
 
-s = sass.compile(filename=f"{SCSS_STYLES}/{MAIN_STYLE_FILE}",
-                 output_style="compressed",)
-with open(f'{COMP_CSS}/{MAIN_STYLE_FILE}.css', "w+") as o:
-    o.write(s)
+compiled_scss = {
+    MAIN_STYLE_FILE: sass.compile(filename=f"{SCSS_STYLES}/{MAIN_STYLE_FILE}",
+                                  output_style="compressed", )
+}
+
 print("done")
 
 def get_request(url):
@@ -149,11 +150,8 @@ def index():
                                  about_logos=about_logos,
                                  repos=repos,
                                  contacts=contacts,
-                                 paragraphs=paragraphs)
-
-@app.route("/scss/<path:scss_file>")
-def scss(scss_file: str):
-    return send_from_directory(COMP_CSS, f"{scss_file}.css")
+                                 paragraphs=paragraphs,
+                                 main_style = compiled_scss[MAIN_STYLE_FILE])
 
 if __name__ == '__main__':
     app.run()

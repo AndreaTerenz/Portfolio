@@ -33,7 +33,10 @@
     <!--Bootstrap & styles-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link href="{{ get_scss('style.scss') }}" rel="stylesheet"/>
+    {#  <link href="{{ get_scss('style.scss') }}" rel="stylesheet"/>#}
+    <style>
+        {{ main_style | safe }}
+    </style>
 
     <!--Fonts-->
     <link href="https://fonts.googleapis.com" rel="preconnect">
